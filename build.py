@@ -25,7 +25,7 @@ cards = []
 for p in sorted(glob.glob(os.path.join(ROOT, "src", "*.py"))):
     m = load(p); A, D = m.ARTICLE, m.DICT; missing = set()
     paras = "".join(f"<p>{wrap(t, D, missing)}</p>" for t in A["paras"])
-    sp = "".join(f'<li>{wrap(q, D, missing)}</li>' for q in A["speaking"]) or '<li class="soon">The questions are coming soon…</li>'
+    sp = "".join(f'<li>{wrap(q, D, missing)}<div class="rec"><button class="recbtn">🎙 Record my answer</button><audio controls hidden></audio></div></li>' for q in A["speaking"]) or '<li class="soon">The questions are coming soon…</li>'
     src = " · ".join(f'<a href="{u}" target="_blank" rel="noopener">{n}</a>' for n, u in A["sources"])
     html = (PAGE.replace("__CSS__", CSS).replace("__TITLE__", H.escape(A["title"])).replace("__TAG__", A["tag"]).replace("__DATE__", A["date"])
             .replace("__LEVEL__", A["level"]).replace("__PARAS__", paras).replace("__SPEAK__", sp).replace("__SOURCES__", src).replace("__WORDS__", str(len(" ".join(A["paras"]).split()))))

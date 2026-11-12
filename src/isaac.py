@@ -12,7 +12,14 @@ ARTICLE = {
   "Fans who like boxes on a shelf have just one option. A physical copy for Switch 2 is listed for $69.99 at one retailer, while every console will also get a digital version. The game was created by Edmund McMillen, and it has stayed popular for more than a decade, mostly because every single run is different.",
   "Whether you play alone or with friends, one thing is certain: the basement is about to get a lot more crowded.",
  ],
- "speaking": [],   # Alina will send the questions
+ "speaking": [
+  "Do you play video games? Which game has stayed with you the longest, and why?",
+  "The article says every single run in Isaac is different. Do you prefer games that change every time, or games where you know exactly what to expect?",
+  "Would you rather play online with friends or alone? What are the advantages of each?",
+  "The release day is the same as GTA VI. Is it a smart or a risky move to launch a game next to a huge competitor? Explain your opinion.",
+  "When you buy a game, a book or music, do you prefer a physical copy or a digital one? Why?",
+  "Some players complained about bugs in the beta. How do you react when a game or an app that you like does not work properly?",
+ ],
  "sources": [
   ["Engadget", "https://www.engadget.com/2240496/the-binding-of-isaac-repentance-online-release-goes-head-to-head-with-gta-6-on-november-19/"],
   ["Siliconera", "https://www.siliconera.com/the-binding-of-isaac-repentance-online-launches-on-gta-vi-release-day/"],
@@ -43,3 +50,11 @@ DICT = {
  "playstation 5": "PS5", "i": "я", "are": "есть, являются", "go": "идти", "from": "из, от", "when": "когда", "not": "не", "no": "нет, никакой", "only": "только", "i'm": "я есть",
  "beta,": "бета", "us": "нас",
 }
+
+DICT.update({
+ "advantages": "преимущества", "an": "артикль «один, какой-то» (перед гласной)", "app": "приложение", "article": "статья", "book": "книга", "buy": "покупать", "change": "меняться, изменяться",
+ "competitor": "конкурент", "do": "делать; (вспомогательный глагол вопроса)", "does": "(вспомогательный глагол вопроса / отрицания)", "each": "каждый", "exactly": "точно, именно", "expect": "ожидать",
+ "explain": "объяснять", "how": "как", "huge": "огромный", "longest": "дольше всего", "move": "шаг, ход; перемещать", "music": "музыка", "next": "рядом, следующий; «next to» = рядом с", "opinion": "мнение",
+ "prefer": "предпочитать", "properly": "правильно, как надо", "rather": "скорее; «would rather» = предпочёл бы", "react": "реагировать", "risky": "рискованный", "same": "тот же самый", "says": "говорит",
+ "smart": "умный, разумный", "time": "раз, время", "video": "видео", "what": "что, какой", "where": "где; в которых", "which": "какой, который", "why": "почему", "work": "работать", "would": "бы (вежливость, предпочтение)", "your": "твой, ваш",
+})

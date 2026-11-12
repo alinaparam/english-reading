@@ -35,7 +35,7 @@ function renderList(){
   document.querySelectorAll('.w').forEach(function(s){s.classList.toggle('saved',!!saved[clean(s.textContent).toLowerCase()])});
 }
 function close(){sh.classList.remove('show');if(cur)cur.classList.remove('on');cur=null}
-document.getElementById('art').addEventListener('click',function(e){
+document.addEventListener('click',function(e){
   var s=e.target.closest('.w');if(!s)return;
   if(cur)cur.classList.remove('on');cur=s;s.classList.add('on');
   en.textContent=clean(s.textContent);ru.textContent=s.dataset.t;
@@ -47,6 +47,17 @@ document.getElementById('sp').onclick=function(){try{speechSynthesis.cancel();va
 document.getElementById('sv').onclick=function(){var w=en.textContent.toLowerCase();if(saved[w])delete saved[w];else saved[w]=ru.textContent;store(saved);this.textContent=saved[w]?'★ Saved':'☆ Save word';renderList()};
 document.getElementById('cp').onclick=function(){var t=Object.keys(saved).map(function(w){return w+' - '+saved[w]}).join('\n');try{navigator.clipboard.writeText(t);this.textContent='Copied ✓'}catch(e){}};
 document.getElementById('cl').onclick=function(){saved={};store(saved);renderList()};
+document.querySelectorAll('.rec').forEach(function(r){
+  var b=r.querySelector('.recbtn'),au=r.querySelector('audio'),mr=null,ch=[];
+  b.onclick=async function(){
+    if(mr&&mr.state==='recording'){mr.stop();return}
+    try{var st=await navigator.mediaDevices.getUserMedia({audio:true});ch=[];mr=new MediaRecorder(st);
+      mr.ondataavailable=function(e){ch.push(e.data)};
+      mr.onstop=function(){st.getTracks().forEach(function(t){t.stop()});au.src=URL.createObjectURL(new Blob(ch,{type:mr.mimeType}));au.hidden=false;b.textContent='🎙 Record again';b.classList.remove('live')};
+      mr.start();b.textContent='■ Stop';b.classList.add('live');au.hidden=true}
+    catch(e){b.textContent='Microphone is blocked'}
+  };
+});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
 renderList();
 })();
