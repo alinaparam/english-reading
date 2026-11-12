@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>__TITLE__ · Reading Room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Pirata+One&display=swap" rel="stylesheet">
+<style>__CSS__</style></head><body>
+<div class="wrap">
+<header class="top">
+ <div class="hearts" aria-hidden="true">
+  <svg class="heart" viewBox="0 0 14 13"><path fill="#b3201f" stroke="#2b0a0a" stroke-width="1" d="M7 12 1 6.3C-.4 4.6.2 1.6 2.6 1.1 4.3.8 5.8 1.6 7 3c1.2-1.4 2.7-2.2 4.4-1.9C13.8 1.6 14.4 4.6 13 6.3z"/></svg>
+  <svg class="heart" viewBox="0 0 14 13"><path fill="#b3201f" stroke="#2b0a0a" stroke-width="1" d="M7 12 1 6.3C-.4 4.6.2 1.6 2.6 1.1 4.3.8 5.8 1.6 7 3c1.2-1.4 2.7-2.2 4.4-1.9C13.8 1.6 14.4 4.6 13 6.3z"/></svg>
+  <svg class="heart" viewBox="0 0 14 13"><path fill="#3a2020" stroke="#2b0a0a" stroke-width="1" d="M7 12 1 6.3C-.4 4.6.2 1.6 2.6 1.1 4.3.8 5.8 1.6 7 3c1.2-1.4 2.7-2.2 4.4-1.9C13.8 1.6 14.4 4.6 13 6.3z"/></svg>
+ </div>
+ <div class="meta"><span class="chip">__LEVEL__</span><span>__TAG__</span><span>·</span><span>__DATE__</span><span>·</span><span>__WORDS__ words</span></div>
+ <h1>__TITLE__</h1>
+ <div class="drip"></div>
+ <a class="back" href="../../index.html">← all articles</a>
+</header>
+<p class="hint">Tap any <b>word</b> to see the translation.</p>
+<article class="paper" id="art">__PARAS__</article>
+<section class="box"><h2>Let's talk</h2><ol class="q">__SPEAK__</ol></section>
+<section class="box"><h2>My words</h2><div class="saved-list"><div id="sl"></div><div class="row"><button id="cp" class="ghost">Copy for Termin</button> <button id="cl" class="ghost">Clear</button></div></div></section>
+<footer>Sources: __SOURCES__</footer>
+</div>
+<div class="sheet" id="sh"><div class="en" id="en"></div><div class="ru" id="ru"></div><div class="row"><button id="sp">🔊 Listen</button><button id="sv" class="ghost">☆ Save word</button><button id="x" class="ghost">Close</button></div></div>
+<script>
+(function(){
+var sh=document.getElementById('sh'),en=document.getElementById('en'),ru=document.getElementById('ru'),cur=null,KEY='reading-saved';
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
+function store(o){try{localStorage.setItem(KEY,JSON.stringify(o))}catch(e){}}
+var saved=load();
+function clean(t){return t.replace(/[’]/g,"'")}
+function renderList(){
+  var l=document.getElementById('sl'),k=Object.keys(saved);
+  l.innerHTML=k.length?'<ul>'+k.map(function(w){return '<li><b>'+w+'</b> - '+saved[w]+'</li>'}).join('')+'</ul>':'<p class="empty">Tap a word, then “Save word”.</p>';
+  document.querySelectorAll('.w').forEach(function(s){s.classList.toggle('saved',!!saved[clean(s.textContent).toLowerCase()])});
+}
+function close(){sh.classList.remove('show');if(cur)cur.classList.remove('on');cur=null}
+document.getElementById('art').addEventListener('click',function(e){
+  var s=e.target.closest('.w');if(!s)return;
+  if(cur)cur.classList.remove('on');cur=s;s.classList.add('on');
+  en.textContent=clean(s.textContent);ru.textContent=s.dataset.t;
+  document.getElementById('sv').textContent=saved[en.textContent.toLowerCase()]?'★ Saved':'☆ Save word';
+  sh.classList.add('show');
+});
+document.getElementById('x').onclick=close;
+document.getElementById('sp').onclick=function(){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(en.textContent);u.lang='en-US';u.rate=.9;speechSynthesis.speak(u)}catch(e){}};
+document.getElementById('sv').onclick=function(){var w=en.textContent.toLowerCase();if(saved[w])delete saved[w];else saved[w]=ru.textContent;store(saved);this.textContent=saved[w]?'★ Saved':'☆ Save word';renderList()};
+document.getElementById('cp').onclick=function(){var t=Object.keys(saved).map(function(w){return w+' - '+saved[w]}).join('\n');try{navigator.clipboard.writeText(t);this.textContent='Copied ✓'}catch(e){}};
+document.getElementById('cl').onclick=function(){saved={};store(saved);renderList()};
+document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+renderList();
+})();
+</script></body></html>

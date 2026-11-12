@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reading Room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Pirata+One&display=swap" rel="stylesheet">
+<style>:root{--bg:#160d0d;--bg2:#221212;--paper:#f1e6d3;--ink:#2b1a14;--blood:#b3201f;--blood2:#7e1414;--tear:#9fc6e8;--gold:#d9a441;--muted:#8a7360}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:radial-gradient(ellipse at 50% -10%,#3a1818 0,var(--bg) 60%) fixed;color:var(--paper);font-family:'Patrick Hand','Comic Sans MS',cursive;font-size:20px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 2px,transparent 2px 4px);pointer-events:none;z-index:50;opacity:.35}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 120px}
+header.top{text-align:center;padding:34px 0 8px;position:relative}
+header.top .hearts{display:flex;gap:6px;justify-content:center;margin-bottom:10px}
+.heart{width:28px;height:26px}
+h1,h2,h3{font-family:'Pirata One','Times New Roman',serif;font-weight:400;letter-spacing:.02em}
+h1{font-size:clamp(38px,9vw,64px);line-height:1.05;margin:6px 0 10px;color:var(--paper);text-shadow:3px 3px 0 var(--blood2),0 0 22px rgba(179,32,31,.45)}
+.meta{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;font-size:16px;color:var(--muted)}
+.chip{background:var(--blood2);color:var(--paper);border-radius:999px;padding:1px 12px;font-size:15px}
+.drip{height:34px;margin:6px 0 0;background:
+ radial-gradient(circle at 12% 0,var(--blood) 0 9px,transparent 10px),radial-gradient(circle at 31% 0,var(--blood) 0 13px,transparent 14px),radial-gradient(circle at 58% 0,var(--blood) 0 8px,transparent 9px),radial-gradient(circle at 79% 0,var(--blood) 0 12px,transparent 13px),linear-gradient(var(--blood) 0 6px,transparent 6px);opacity:.9}
+.hint{margin:14px 0;text-align:center;font-size:16px;color:var(--tear)}
+.hint b{border-bottom:2px dotted var(--tear);font-weight:400}
+article.paper{background:var(--paper);color:var(--ink);border-radius:6px 16px 8px 14px;padding:26px 24px;box-shadow:0 0 0 3px var(--blood2),8px 10px 0 rgba(0,0,0,.45);transform:rotate(-.25deg)}
+article.paper p{margin:0 0 18px;font-size:21px}
+article.paper p:first-child::first-letter{font-family:'Pirata One',serif;font-size:3em;float:left;line-height:.9;padding:4px 8px 0 0;color:var(--blood)}
+.w{cursor:pointer;border-radius:4px;transition:background .12s}
+.w:hover{background:rgba(179,32,31,.14)}
+.w.on{background:var(--blood);color:var(--paper);box-shadow:0 0 0 2px var(--blood)}
+.w.saved{text-decoration:underline wavy var(--gold);text-underline-offset:4px}
+.sheet{position:fixed;left:50%;bottom:14px;transform:translate(-50%,160%);transition:transform .22s;width:min(560px,calc(100% - 24px));background:#0f0808;border:3px solid var(--blood);border-radius:14px;padding:14px 16px;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.6)}
+.sheet.show{transform:translate(-50%,0)}
+.sheet .en{font-family:'Pirata One',serif;font-size:30px;line-height:1.1}
+.sheet .ru{font-size:22px;color:var(--tear);margin:2px 0 10px}
+.sheet .row{display:flex;gap:8px;flex-wrap:wrap}
+button,.btn{font:inherit;font-size:17px;border:2px solid var(--blood);background:var(--blood2);color:var(--paper);border-radius:10px;padding:4px 14px;cursor:pointer}
+button.ghost{background:transparent}
+button:active{transform:translateY(1px)}
+section.box{margin-top:34px}
+section.box h2{font-size:34px;margin:0 0 8px;color:var(--paper);display:flex;align-items:center;gap:10px}
+section.box h2::before{content:"";width:22px;height:20px;background:var(--blood);clip-path:polygon(50% 100%,0 35%,0 12%,22% 0,50% 18%,78% 0,100% 12%,100% 35%)}
+ol.q{margin:0;padding-left:0;list-style:none;counter-reset:q}
+ol.q li{counter-increment:q;background:var(--bg2);border:2px solid var(--blood2);border-radius:12px;padding:12px 14px 12px 52px;margin-bottom:10px;position:relative}
+ol.q li::before{content:counter(q);position:absolute;left:12px;top:9px;width:30px;height:30px;border-radius:50%;background:var(--blood);display:grid;place-items:center;font-family:'Pirata One',serif;font-size:20px}
+ol.q li.soon{color:var(--muted);font-style:italic}
+ol.q li.soon::before{content:"?"}
+.saved-list{background:var(--bg2);border:2px dashed var(--blood2);border-radius:12px;padding:12px 14px}
+.saved-list ul{margin:0 0 10px;padding-left:20px}
+.saved-list .empty{color:var(--muted)}
+footer{margin-top:40px;text-align:center;color:var(--muted);font-size:15px}
+footer a{color:var(--tear)}
+a{color:var(--tear)}
+.back{display:inline-block;margin-top:14px;font-size:16px;color:var(--muted);text-decoration:none}
+.card{display:block;position:relative;background:var(--paper);color:var(--ink);text-decoration:none;border-radius:8px 16px 10px 14px;padding:18px 20px;margin:18px 0;box-shadow:0 0 0 3px var(--blood2),6px 8px 0 rgba(0,0,0,.45);transition:transform .15s}
+.card:hover{transform:translate(-2px,-3px) rotate(-.4deg)}
+.card h2{margin:0 0 4px;font-size:32px;color:var(--blood2)}
+.card p{margin:0 0 6px}.card small{color:#7a6552}
+.card .lv{position:absolute;right:16px;top:14px;background:var(--blood);color:var(--paper);border-radius:999px;padding:0 12px;font-size:16px}
+@media(max-width:560px){body{font-size:19px}article.paper{padding:20px 16px}article.paper p{font-size:20px}}
+</style></head><body>
+<div class="wrap">
+<header class="top"><h1>Reading Room</h1><div class="drip"></div></header>
+<p class="hint">Short articles with tap-to-translate words and speaking questions.</p>
+<a class="card" href="articles/isaac-goes-online/index.html"><span class="lv">B2</span><h2>Isaac Goes Online on Consoles</h2><p>The Binding of Isaac: Repentance+ Online arrives on PS5, Xbox and Switch 2 on November 19.</p><small>Gaming news · 13 November 2026</small></a>
+</div></body></html>
